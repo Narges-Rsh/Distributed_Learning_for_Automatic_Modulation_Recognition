@@ -1,1 +1,1 @@
-# Distributed_Learning_for_AMR
+# Distributed_Learning_for_Automatic_Modulation_Recognition
