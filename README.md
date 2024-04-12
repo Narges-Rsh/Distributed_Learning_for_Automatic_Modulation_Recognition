@@ -7,7 +7,7 @@ In this study, we utilized the TeMuRAMRD.2023 (Terrain-driven Multi-Receiver Aut
 
 #Instruction  
 CentAMR Method:  
--For the CentAMR method, which includes training based on datast from 6 receivers, initiate the training process by running the train file with 'nrx' set to 6.
+-For the CentAMR method, which includes training based on datast from 6 receivers, initiate the training process by running the train file with 'nrx' set to 6.  
 Distributed Learning Methods:   
 Begin by training the DAMR-V model, which involves training six individual models based on VTCNN2-1D architecture, and then integration of probabilistic predictions.  
 For the feature sharing step (DAMR-F8), execute the train file with the following configurations:
