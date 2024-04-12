@@ -4,3 +4,6 @@ This repository presents two distributed methods for Automatic Modulation Recogn
 [Distributed learning for automatic modulation recognition in bandwidth-limited networks]()
 
 In this study, we utilized the TeMuRAMRD.2023 (Terrain-driven Multi-Receiver Automatic Modulation Recognition Dataset) as a multi-receiver dataset.
+
+#Instruction
+For the CentAMR method, CNN!
