@@ -5,7 +5,7 @@ This repository presents two distributed methods for Automatic Modulation Recogn
 
 In this study, we utilized the TeMuRAMRD.2023 (Terrain-driven Multi-Receiver Automatic Modulation Recognition Dataset) as a multi-receiver dataset. This dataset has the maximum number of 6 receivers.
 
-#Instruction  
+To do the training process for different methods, follow these guidelines:   
 CentAMR Method:  
 -For the CentAMR method, which includes training based on datast from 6 receivers, initiate the training process by running the train file with 'nrx' set to 6.  
 Distributed Learning Methods:   
