@@ -4,7 +4,7 @@ import torch.nn as nn
 from .ModelBase import ModelBase
 
 # https://github.com/brysef/rfml/blob/master/rfml/nn/model/cnn.py
-class CNN1(ModelBase):
+class VTCNN2-1D(ModelBase):
     """Convolutional Neural Network based on the "VT_CNN2" Architecture
 
     This network is based off of a network for modulation classification first
