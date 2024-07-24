@@ -19,7 +19,6 @@ def train(model, dm, name, epochs=40, precision="32", debug=False):
     
     callbacks = [
         ModelCheckpoint(monitor='val/F1', mode='max', save_top_k=1, save_last=True),
-     
     ]
     profiler = None
 
@@ -67,8 +66,7 @@ if __name__ == "__main__":
     torch.set_float32_matmul_precision('high')
 
     dm = SimpleHDF5DataModule("/home/nrashvan/SPIE_Paper/cspb_DisAMR_1a5961a.hdf5", args.bs, n_rx=args.nrx)  
-    #dm = Simple("/home/nrashvan/distributed_paper_2/previous_model_base/multireceiver_dataset_1000samples.h5py", batch_size=256, n_rx=6)
-    #dm = SimpleHDF5DataModule("/home/nrashvan/Dataset_paper/Final/Scenario_1/dataset/cspb_DisAMR_1a5961a.hdf5", args.bs, n_rx=args.nrx)
+   
     model_args = {
         # Required
         'input_samples': dm.frame_size, 
