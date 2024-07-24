@@ -49,10 +49,8 @@ class ModelBase(pl.LightningModule):
         output = self.forward(data)
         self.val_metrics.update(output, target)
         self.cm_metric.update(output, target)
-        # batch_size = len(snr)
-        # batch_idx = batch_nb*batch_size
-        # self.outputs_list[batch_idx:batch_idx+batch_size] = output.detach().cpu()
-
+        
+        
     def on_validation_epoch_end(self):
         metrics_dict = self.val_metrics.compute()
         self.val_metrics.reset()
@@ -122,7 +120,6 @@ class ModelBase(pl.LightningModule):
 
         self.graph_F1 = F1s
         self.graph_snr = SNRs
-
         self.outputs_list = self.outputs_list.zero_()
 
         fig = plt.figure(figsize=(8, 4))
