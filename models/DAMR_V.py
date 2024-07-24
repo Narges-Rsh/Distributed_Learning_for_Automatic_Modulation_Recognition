@@ -39,8 +39,8 @@ class VTCNN2_1D(nn.Module):
         features = self.model(x)
         y = self.classifier(features)   
         return y, features
-        
-   
+
+
 class DAMR_V(ModelBase):
     
     def __init__(
@@ -56,15 +56,12 @@ class DAMR_V(ModelBase):
 
         
         self.lr = learning_rate
-
-        
         self.nrx = input_channels
         self.example_input_array = torch.zeros((1,input_channels,input_samples), dtype=torch.cfloat)
         self.loss = nn.CrossEntropyLoss() 
         self.automatic_optimization = False
-
-        
         self.fe_models = nn.ModuleList()
+        
         for i in range(input_channels):
             self.fe_models.append(VTCNN2_1D(input_samples, 1, feature_width, len(classes)))
 
@@ -76,7 +73,6 @@ class DAMR_V(ModelBase):
         metrics = torchmetrics.MetricCollection(metrics)
         self.val_metrics = metrics.clone(f"val/")
         self.test_metrics = metrics.clone(f"test/")
-        
         self.cm_metric = torchmetrics.classification.MulticlassConfusionMatrix(len(classes), normalize='true')
 
 
@@ -84,26 +80,22 @@ class DAMR_V(ModelBase):
         
         y = []
         for i in range(self.nrx):
-              
             out, features = self.fe_models[i](x[:,i:i+1]) 
             y.append(out)
 
         y = torch.stack(y, -2)
         y = torch.sum(y,dim=1)
-
         return y
 
     def configure_optimizers(self):
         opts = []
         for model in self.fe_models:
             opts.append(torch.optim.AdamW(model.parameters(), lr=self.lr, weight_decay=0.00001))
-        
         return opts
 
 
     def training_step(self, batch, batch_nb):
         data, target, _ = batch
-
         opts = self.optimizers()
         model_opts = opts[:]
         
@@ -116,7 +108,6 @@ class DAMR_V(ModelBase):
 
             
             y, _ = fe(data[:,i:i+1])     
-
             loss = self.loss(y, target)
             if self.global_step!= 0: self.logger.log_metrics({f'train/fe_{i}_loss': loss}, self.global_step)
             total_fe_loss += loss
@@ -153,12 +144,9 @@ class DAMR_V(ModelBase):
         self.test_metrics['F1'].update(output, target) 
         self.cm_metric.update(output, target)       
 
-
-           
         batch_size = len(snr)                  
         batch_idx = batch_nb*batch_size   
         self.outputs_list[batch_idx:batch_idx+batch_size] = output.detach().cpu()    
-      
         snr = snr.squeeze(dim=-1)   
         self.snr_list[batch_idx:batch_idx+batch_size] = snr.detach().cpu()   
        
@@ -166,18 +154,3 @@ class DAMR_V(ModelBase):
         for i, model in enumerate(self.fe_models):
             y, _ = model(data[:,i:i+1])    
             self.test_metrics[f'F1_fe{i}'].update(y, target)    
-
-
-
-
-
-   
-        
-        
-        
-      
-
-
-
-
-        
