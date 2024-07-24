@@ -107,8 +107,6 @@ class ModelBase(pl.LightningModule):
         ##SNR plot
         test_snr = self.snr_list
         test_true = self.trainer.datamodule.ds_test.dataset.tensors[1][self.trainer.datamodule.ds_test.indices][:len(self.outputs_list)]
-        # test_snr = torch.round(self.snr_list)
-        # SNRs, _ = torch.unique(test_snr, return_counts=True)
         test_snr = torch.round(test_snr) 
         SNRs, snr_counts = torch.unique(test_snr, return_counts=True)
 
