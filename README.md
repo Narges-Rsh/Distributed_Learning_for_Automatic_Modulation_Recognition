@@ -6,7 +6,7 @@ This repository presents two distributed methods for Automatic Modulation Recogn
 In this study, we utilized the TeMuRAMRD.2023 (Terrain-driven Multi-Receiver Automatic Modulation Recognition Dataset) as a multi-receiver dataset. This dataset has the maximum number of 6 receivers.
 
 To do the training process and replicate the results for different methods, follow these guidelines:   
-- For local reeiver, conduct training individually for each receiver by setting the model parameter in the training file to 'VTCNN2-1D' and 'nrx' to 1.
+- For local receiver, conduct training individually for each receiver by setting the model parameter in the training file to 'VTCNN2-1D' and 'nrx' to 1.
   
 - For the CentAMR method, which includes training based on datast from 6 receivers using the 'VTCNN2-1D' model , initiate the training process by executing the train file with the model argument set to 'VTCNN2-1D' and 'nrx' set to 6.
   
