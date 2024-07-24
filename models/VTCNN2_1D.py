@@ -48,7 +48,6 @@ class VTCNN2_1D(ModelBase):
         self.loss = nn.CrossEntropyLoss() 
         self.lr = learning_rate
         self.example_input_array = torch.zeros((1,input_channels,input_samples), dtype=torch.cfloat)
-
         self.model = nn.Sequential()
 
         # Batch x 1-channel x IQ x input_samples
@@ -74,15 +73,12 @@ class VTCNN2_1D(ModelBase):
         # Flatten the input layer down to 1-d
         self.model.append(nn.Flatten())
 
-        # Batch x Features
         self.model.append(nn.Linear(80 * 1 * input_samples, 256))
         self.model.append(nn.ReLU())
         self.model.append(nn.BatchNorm1d(256))
-
         self.model.append(nn.Linear(256, len(classes)))
 
     def forward(self, x: torch.Tensor):
-        #print("input shape",x.shape)
         x = torch.view_as_real(x)
         x = x.transpose(-2,-1).flatten(1,2).contiguous()
         y = self.model(x)
