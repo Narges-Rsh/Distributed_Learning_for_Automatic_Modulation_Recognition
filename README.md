@@ -1,7 +1,7 @@
 # Distributed_Learning_for_Automatic_Modulation_Recognition
 
 This repository presents two distributed methods for Automatic Modulation Recognition (AMR). These methods include consensus voting (DAMR-V) and feature sharing (DAMR-F) approaches as detailed in the following article. Please use the following paper for citation:  
-[Distributed learning for automatic modulation recognition in bandwidth-limited networks]()
+[Distributed learning for automatic modulation recognition in bandwidth-limited networks](https://www.spiedigitallibrary.org/conference-proceedings-of-spie/13057/130570X/Distributed-learning-for-automatic-modulation-recognition-in-bandwidth-limited-networks/10.1117/12.3013532.short)
 
 In this study, we utilized the TeMuRAMRD.2023 (Terrain-driven Multi-Receiver Automatic Modulation Recognition Dataset) as a multi-receiver dataset. This dataset has the maximum number of 6 receivers.
 
