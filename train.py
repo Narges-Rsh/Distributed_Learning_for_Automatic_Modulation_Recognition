@@ -65,7 +65,7 @@ if __name__ == "__main__":
     seed_everything(args.seed)
     torch.set_float32_matmul_precision('high')
 
-    dm = SimpleHDF5DataModule("/home/nrashvan/SPIE_Paper/cspb_DisAMR_1a5961a.hdf5", args.bs, n_rx=args.nrx)  
+    dm = SimpleHDF5DataModule("/home/SPIE_Paper/cspb_DisAMR_1a5961a.hdf5", args.bs, n_rx=args.nrx)  
    
     model_args = {
         # Required
