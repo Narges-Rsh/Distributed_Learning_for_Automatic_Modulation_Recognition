@@ -51,8 +51,7 @@ class DAMR_F8(ModelBase):
 
 
         Voting_model.eval()     
-
-        #print("Voting_model", Voting_model)  
+  
 
         self.loaded_models = Voting_model.fe_models
         for i in range(input_channels):
@@ -64,11 +63,8 @@ class DAMR_F8(ModelBase):
         self.nrx = input_channels
         self.loss = nn.CrossEntropyLoss()
         self.feature_width=feature_width
-
         self.automatic_optimization = False
-
         self.classifier_model = Classifier(feature_width*input_channels, len(classes))
-
         self.example=torch.zeros((1,input_channels,input_samples), dtype=torch.float) 
 
 
@@ -79,7 +75,6 @@ class DAMR_F8(ModelBase):
         
         self.val_metrics = metrics.clone(f"val/")
         self.test_metrics = metrics.clone(f"test/")
-
         self.cm_metric = torchmetrics.classification.MulticlassConfusionMatrix(len(classes), normalize='true')
 
 
@@ -94,13 +89,11 @@ class DAMR_F8(ModelBase):
         f = torch.stack(f, -1)              
         f = torch.flatten(f, start_dim=1)   
         y = self.classifier_model(f)         
-
         return y
         
 
     def configure_optimizers(self):
         opts= torch.optim.AdamW(self.classifier_model.parameters(), lr=self.lr, weight_decay=0.00001)
-        
         return opts
     
 
@@ -124,8 +117,6 @@ class DAMR_F8(ModelBase):
         f = torch.flatten(f, start_dim=1)
         y = self.classifier_model(f)
              
-
-
         # calculate loss for clasifier
         loss = self.loss(y, target)
         if self.global_step!= 0: self.logger.log_metrics({'train/classifier_loss': loss, 'epoch': self.current_epoch}, self.global_step)
@@ -173,30 +164,4 @@ class DAMR_F8(ModelBase):
         for i, model in enumerate(self.loaded_models ):  
             y, _ = model(data[:,i:i+1])    
             self.test_metrics[f'F1_fe{i}'].update(y, target)  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-    
-
-
-
-        
-    
-
 
