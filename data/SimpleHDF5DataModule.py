@@ -15,8 +15,6 @@ class SimpleHDF5DataModule(pl.LightningDataModule):
         self.transforms = []
         self.rng = torch.Generator().manual_seed(seed)
         self.n_rx=n_rx
-        
-
         self.classes = ['bpsk', 'qpsk', '8psk', 'dqpsk', 'msk', '16qam', '64qam', '256qam']
         self.ds_train, self.ds_val, self.ds_test = [], [], []
 
@@ -35,19 +33,11 @@ class SimpleHDF5DataModule(pl.LightningDataModule):
 
 
             P_max = torch.max(snr.squeeze(-1), -1)[0]  
-
             P_noise = -173.8 + 10 * np.log10(30e3)
             snr = P_max - P_noise
-
             y=y.flatten()    
-
             
-            print("x shape", x.shape)
-            print("y shape", y.shape)
-            print("snr shape", snr.shape)
-
             ds_full = TensorDataset(x, y, snr)
-
             self.ds_train, self.ds_val, self.ds_test = random_split(ds_full, [0.6, 0.2, 0.2], generator = self.rng)
 
     def train_dataloader(self) -> DataLoader:
